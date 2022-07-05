@@ -1,0 +1,49 @@
+<div ria-labelledby="staticBackdropLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-right">
+          <button
+            routerLink="/routerUsuario/verHoteles"
+            class="btn btn-primary"
+            type="button"
+          >
+            Regresar
+          </button>
+        </div>
+
+        <div class="px-4 py-5">
+          <h5 class="text-uppercase">{{ this.identidad.nombre }}</h5>
+
+          <h4 class="mt-5 theme-color mb-5">Gracias por elegirnos.</h4>
+
+          <span class="theme-color">Detalle de compras</span>
+          <div class="mb-3">
+            <hr class="new1" />
+          </div>
+
+          <div
+            *ngFor="let productos of this.compras"
+            class="d-flex justify-content-between"
+          >
+            <span class="font-weight-bold">{{ productos.compra }}</span>
+            <span class="text-muted">{{ productos.precio }}</span>
+          </div>
+
+          <div class="d-flex justify-content-between mt-3">
+            <span class="font-weight-bold">Total</span>
+            <span class="font-weight-bold theme-color"
+              >Q{{ factura.total }}</span
+            >
+          </div>
+
+          <div class="text-center mt-5">
+            <button (click)="pagar(this.identidad._id)" class="btn btn-primary">
+              Paga tu factura
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

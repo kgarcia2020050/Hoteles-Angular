@@ -1,0 +1,138 @@
+<app-navbar-vistas></app-navbar-vistas>
+
+<div class="banner">
+  <div class="capa"></div>
+  <div class="info">
+    <h1>Bienvenido Administrador</h1>
+    <p>El administrador puede ver todos los usuarios registrados, Puede agregar a la base de datos un nuevo hotel y
+      Puede ver la estadística.</p>
+  </div>
+</div>
+
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2>Control de Hoteles
+                    </h2>
+                  </div>
+
+                  <div class="wrap">
+                    <div class="search">
+                      <input [(ngModel)]="search" type="text" class="searchTerm" placeholder="Buscar">
+                      <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button *ngIf="this.identidad.rol == 'ADMIN'" id="ap" type="button" class="learn-more"
+                    data-bs-target="#modalAgregarHotel" data-bs-toggle="modal" [routerLink]="['/principal/nuevo']">
+                    <span class="circle" aria-hidden="true">
+                      <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Agregar Hotel</span>
+                  </button>
+
+
+
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col" *ngIf="this.identidad.rol == 'ADMIN'" scope="col">Gerente del hotel</th>
+                        <th scope="col"></th>
+                        <th scope="col">Opciones</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr *ngFor="let hoteles of getModelo | busqueda: search">
+                        <th scope="row">{{ hoteles.nombre }}</th>
+                        <td>
+                          <span>
+                            <span>{{ hoteles.direccion }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span *ngIf="this.identidad.rol == 'ADMIN'">{{ hoteles.gerente }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span></span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>
+                              <a *ngIf="this.identidad.rol == 'USUARIO'"
+                                [routerLink]="['/routerUsuario/verHotel', hoteles._id]"><button
+                                  class="btn btn-outline-success">
+                                  <i class="fa-solid fa-eye"></i></button></a>
+                              <a *ngIf="this.identidad.rol == 'ADMIN'"
+                                [routerLink]="['/principal/verHotel', hoteles._id]"><button
+                                  class="btn btn-outline-success">
+                                  <i class="fa-solid fa-eye"></i></button></a>
+                            </span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span></span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Direccion</th>
+      <th *ngIf="this.identidad.rol == 'ADMIN'" scope="col">
+        Gerente del hotel
+      </th>
+      <th scope="col">Ver</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hoteles of getModelo | busqueda: search">
+      <td>{{ hoteles.nombre }}</td>
+      <td>{{ hoteles.direccion }}</td>
+      <td *ngIf="this.identidad.rol == 'ADMIN'">{{ hoteles.gerente }}</td>
+      <td>
+        <a *ngIf="this.identidad.rol == 'USUARIO'" [routerLink]="['/routerUsuario/verHotel', hoteles._id]"><button
+            class="btn btn-outline-success">
+            <i class="fa-solid fa-eye"></i></button></a>
+        <a *ngIf="this.identidad.rol == 'ADMIN'" [routerLink]="['/principal/verHotel', hoteles._id]"><button
+            class="btn btn-outline-success">
+            <i class="fa-solid fa-eye"></i></button></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button *ngIf="this.identidad.rol == 'ADMIN'" id="ap" class="btn btn-primary" type="button"
+  [routerLink]="['/principal/nuevo']">
+  Nuevo hotel
+</button> -->

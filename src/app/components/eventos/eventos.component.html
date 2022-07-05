@@ -1,0 +1,176 @@
+<app-navbar-vistas></app-navbar-vistas>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre del evento</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Lugar</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eventos of getEventosModel">
+      <td>{{ eventos.nombre }}</td>
+      <td>{{ eventos.descripcion }}</td>
+      <td>{{ eventos.lugar }}</td>
+      <td>{{ eventos.fecha }}</td>
+      <td>
+        <a
+          ><button
+            (click)="deleteEvento(eventos._id)"
+            class="btn btn-outline-danger"
+          >
+            <i class="fa-solid fa-trash"></i></button
+        ></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button
+  id="ap"
+  class="btn btn-primary"
+  type="button"
+  [routerLink]="['/routerHotel/agendar', identidad._id]"
+>
+  Agendar evento
+</button>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre del servicio</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let servicio of getServicioHotel">
+      <td>{{ servicio.nombre }}</td>
+      <td>{{ servicio.descripcion }}</td>
+      <td>Q{{ servicio.precio }}</td>
+      <td>
+        <a
+          ><button
+            (click)="deleteServicio(servicio._id)"
+            class="btn btn-outline-danger"
+          >
+            <i class="fa-solid fa-trash"></i></button
+        ></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button
+  id="ap"
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#staticBackdrop"
+>
+  Agregar servicio
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar servicios</h5>
+      </div>
+      <div class="modal-body">
+        <form #services="ngForm">
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <span
+                  *ngIf="!nombre.valid && nombre.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <input
+                  name="nombre"
+                  #nombre="ngModel"
+                  [(ngModel)]="postServicios.nombre"
+                  type="text"
+                  id="form3Example1"
+                  class="form-control"
+                  required="true"
+                />
+                <label class="form-label" for="form3Example1"
+                  >Nombre del servicio</label
+                >
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <span
+                  *ngIf="!precio.valid && precio.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <input
+                  name="precio"
+                  #precio="ngModel"
+                  [(ngModel)]="postServicios.precio"
+                  type="number"
+                  id="form3Example2"
+                  class="form-control"
+                  required="true"
+                />
+                <label class="form-label" for="form3Example2">Precio</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-outline">
+            <span
+              *ngIf="!descripcion.valid && descripcion.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <textarea
+              name="descripcion"
+              #descripcion="ngModel"
+              [(ngModel)]="postServicios.descripcion"
+              class="form-control"
+              id="textAreaExample"
+              rows="4"
+              required="true"
+            ></textarea>
+            <label class="form-label" for="textAreaExample"
+              >Descripcion del servicio</label
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          (click)="postServicio(services)"
+          [disabled]="!services.form.valid"
+          type="submit"
+          data-bs-dismiss="modal"
+          class="btn btn-primary"
+        >
+          Listo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<app-navbar-vistas></app-navbar-vistas>
+
+<div *ngIf="solicitadosModel" style="display: block">
+  <h1>Hoteles con mayor demanda</h1>
+  <canvas
+    baseChart
+    chartType="pie"
+    [data]="chartData"
+    [colors]="chartColors"
+    [labels]="chartLabels"
+    [options]="chartOptions"
+    [plugins]="chartPlugins"
+    [legend]="chartLegend"
+  >
+  </canvas>
+</div>

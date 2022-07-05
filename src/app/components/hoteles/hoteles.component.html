@@ -1,0 +1,229 @@
+<app-navbar-vistas></app-navbar-vistas>
+
+<div class="banner">
+  <div class="capa"></div>
+  <div class="info">
+    <h1>Bienvenido Administrador del Hotel</h1>
+    <p>
+      El administrador del hotel puede consultar todas las reservaciones hechas,
+      buscar a un usuario hospedado en su hotel, ver las habitaciones
+      disponibles y las facturas con todos los servicios.
+    </p>
+  </div>
+</div>
+
+<!------------------------>
+
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2>Habitaciones</h2>
+                  </div>
+
+                  <div class="wrap">
+                    <div class="search">
+                      <input
+                        type="text"
+                        class="searchTerm"
+                        placeholder="Buscar"
+                      />
+                      <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    id="ap"
+                    type="button"
+                    class="learn-more"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalAgregarCuarto"
+                    data-bs-toggle="modal"
+                  >
+                    <span class="circle" aria-hidden="true">
+                      <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Agregar habitación</span>
+                  </button>
+
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Habitación</th>
+                        <th scope="col">Espacio de personas</th>
+                        <th scope="col" scope="col">Estado</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Usuario hospedado</th>
+                        <th scope="col">Modificar habitación</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let cuartos of getModelo">
+                        <th scope="row">{{ cuartos.nombre }}</th>
+                        <td>
+                          <span>
+                            <span>{{ cuartos.espacio }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>{{ cuartos.disponibilidad }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>Q.{{ cuartos.precio }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span> <td *ngIf="!cuartos.idUsuario"></td></span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>
+                              <td *ngIf="cuartos.idUsuario">
+                                {{ cuartos.idUsuario.nombre }}
+                              </td></span
+                            >
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>
+                              <a
+                                ><button
+                                  [routerLink]="[
+                                    '/routerHotel/editarCuarto',
+                                    cuartos._id
+                                  ]"
+                                  class="btn btn-outline-primary"
+                                >
+                                  <i class="fa-solid fa-pen"></i></button
+                              ></a>
+                            </span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="modalAgregarCuarto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo cuarto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #agregarCuarto="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="nombre"
+              #nombre="ngModel"
+              [(ngModel)]="postModelo.nombre"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Espacio de personas</label>
+            <span
+              *ngIf="!espacio.valid && espacio.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="number"
+              class="form-control"
+              name="espacio"
+              #espacio="ngModel"
+              [(ngModel)]="postModelo.espacio"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descripcion</label>
+            <span
+              *ngIf="!descripcion.valid && descripcion.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="descripcion"
+              #descripcion="ngModel"
+              [(ngModel)]="postModelo.descripcion"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Precio</label>
+            <span *ngIf="!precio.valid && precio.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="number"
+              class="form-control"
+              name="precio"
+              #precio="ngModel"
+              [(ngModel)]="postModelo.precio"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          [disabled]="!agregarCuarto.form.valid"
+          (click)="postHabitacion(agregarCuarto)"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<body>
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img
+            class="rounded-circle mt-5"
+            width="200px"
+            src="https://previews.123rf.com/images/darkink/darkink1705/darkink170500063/78443394-interior-de-la-habitaci%C3%B3n-del-hotel-interior-de-la-casa-de-dormitorio-con-cama-y-ventana-con-paisaje.jpg"
+          />
+        </div>
+      </div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Modificar habitacion</h4>
+          </div>
+          <form #editForm="ngForm">
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <span
+                  *ngIf="!nombre.valid && nombre.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <label class="labels">Nombre de la habitacion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nombre"
+                  required="true"
+                  #nombre="ngModel"
+                  [(ngModel)]="getIdCuarto.nombre"
+                />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <span
+                  *ngIf="!espacio.valid && espacio.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <label class="labels">Personas permitidas</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="espacio"
+                  #espacio="ngModel"
+                  required="true"
+                  [(ngModel)]="getIdCuarto.espacio"
+                />
+              </div>
+
+              <div class="col-md-12">
+                <span
+                  *ngIf="!disponibilidad.valid && disponibilidad.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <label class="labels">Estado</label>
+                <input
+                  readonly
+                  type="text"
+                  class="form-control"
+                  name="disponibilidad"
+                  #disponibilidad="ngModel"
+                  required="true"
+                  [(ngModel)]="getIdCuarto.disponibilidad"
+                />
+              </div>
+
+              <div class="col-md-12">
+                <span
+                  *ngIf="!precio.valid && precio.touched"
+                  class="requiredField"
+                >
+                  Campo requerido
+                </span>
+                <label class="labels">Precio</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="precio"
+                  #precio="ngModel"
+                  required="true"
+                  [(ngModel)]="getIdCuarto.precio"
+                />
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <button
+                [disabled]="!editForm.form.valid"
+                class="btn btn-success profile-button"
+                type="button"
+                (click)="putHabitacion()"
+              >
+                Guardar cambios
+              </button>
+              <br />
+              <br />
+              <button
+                routerLink="/routerHotel/hoteles"
+                class="btn btn-primary"
+                type="button"
+              >
+                Regresar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

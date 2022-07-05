@@ -1,0 +1,110 @@
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="this.identidad.rol == 'ADMIN'">
+          <a
+            class="nav-link"
+            routerLink="/principal/administracion"
+            routerLinkActive="active"
+            >Hoteles</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="this.identidad.rol == 'ADMIN'">
+          <a
+            class="nav-link"
+            routerLink="/principal/registrados"
+            routerLinkActive="active"
+            >Usuarios registrados</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="this.identidad.rol == 'ADMIN'">
+          <a
+            class="nav-link"
+            routerLink="/principal/solicitados"
+            routerLinkActive="active"
+            >Hoteles más solicitados</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="this.identidad.rol == 'USUARIO'">
+          <a class="nav-link" routerLink="/routerUsuario/verHoteles" routerLinkActive="active"
+            >Inicio</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="this.identidad.rol == 'HOTEL'">
+          <a
+            class="nav-link"
+            routerLink="/routerHotel/hoteles"
+            routerLinkActive="active"
+            >Habitaciones de mi hotel</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="this.identidad.rol == 'HOTEL'">
+          <a
+            class="nav-link"
+            routerLink="/routerHotel/eventos"
+            routerLinkActive="active"
+            >Eventos</a
+          >
+        </li>
+      </ul>
+    </div>
+    <li class="nav-item dropdown">
+      <a
+        id="user"
+        class="nav-link dropdown-toggle link-warning"
+        href="#"
+        id="navbarScrollingDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-user"></i> Hola, {{ this.identidad.nombre }}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+        <li>
+          <a
+            *ngIf="this.identidad.rol == 'HOTEL'"
+            class="dropdown-item"
+            [routerLink]="['/routerHotel/editar', this.identidad._id]"
+            >Editar perfil</a
+          >
+          <a
+          *ngIf="this.identidad.rol == 'USUARIO'"
+          class="dropdown-item"
+          [routerLink]="['/routerUsuario/editar', this.identidad._id]"
+          >Editar perfil</a
+        >
+          <a
+            *ngIf="this.identidad.rol == 'ADMIN'"
+            class="dropdown-item"
+            [routerLink]="['/principal/editar', this.identidad._id]"
+            >Editar perfil</a
+          >
+        </li>
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            routerLink="/inicio"
+            routerLinkActive="active"
+            >Cerrar sesión</a
+          >
+        </li>
+      </ul>
+    </li>
+  </nav>
+</body>

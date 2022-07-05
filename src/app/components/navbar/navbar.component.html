@@ -1,0 +1,53 @@
+<!-- ======= Header ======= -->
+<header
+  id="header"
+  class="fixed-top d-flex align-items-center header-transparent"
+>
+  <div class="container d-flex justify-content-between align-items-center">
+    <div id="logo">
+      <h1>
+        <a class="nav-link" routerLink="/inicio" routerLinkActive="active"
+          >Hoteles</a
+        >
+      </h1>
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a routerLink class="nav-link scrollto active" (click)="toInicio()"
+            >Inicio</a
+          >
+        </li>
+        <li >
+          <a routerLink class="nav-link scrollto" (click)="toAbout()"
+            >Sobre nosotros</a
+          >
+        </li>
+        <li>
+          <a routerLink class="nav-link scrollto" (click)="toServices()"
+            >Servicios</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink
+            class="nav-link scrollto"
+            (click)="toTeam()"
+            routerLinkActive="active"
+            >Equipo</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            routerLink="/login"
+            routerLinkActive="active"
+            >Iniciar sesion</a
+          >
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>

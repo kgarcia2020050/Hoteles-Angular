@@ -1,0 +1,17 @@
+<app-navbar-vistas></app-navbar-vistas>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuarios of getModelo">
+      <td>{{ usuarios.nombre }}</td>
+      <td>{{ usuarios.email }}</td>
+    </tr>
+  </tbody>
+</table>

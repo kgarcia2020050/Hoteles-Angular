@@ -1,0 +1,240 @@
+<div tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          *ngIf="identidad.rol == 'ADMIN'"
+          class="modal-title"
+          id="exampleModalLabel"
+        >
+          Nuevo hotel
+        </h5>
+        <h5
+          *ngIf="identidad.rol == 'HOTEL'"
+          class="modal-title"
+          id="exampleModalLabel"
+        >
+          Agendar evento
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #agregarHotel="ngForm">
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label *ngIf="identidad.rol == 'ADMIN'" class="form-label">Nombre</label>
+            <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="nombre"
+              #nombre="ngModel"
+              [(ngModel)]="postModelo.nombre"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Nombre del evento</label>
+            <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="nombre"
+              #nombre="ngModel"
+              [(ngModel)]="postModeloEvento.nombre"
+              required
+            />
+          </div>
+
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Descripcion</label>
+            <span
+              *ngIf="!descripcion.valid && descripcion.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="descripcion"
+              #descripcion="ngModel"
+              [(ngModel)]="postModeloEvento.descripcion"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Dirección</label>
+            <span
+              *ngIf="!direccion.valid && direccion.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="direccion"
+              #direccion="ngModel"
+              [(ngModel)]="postModelo.direccion"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Lugar</label>
+            <span *ngIf="!lugar.valid && lugar.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="lugar"
+              #lugar="ngModel"
+              [(ngModel)]="postModeloEvento.lugar"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Fecha</label>
+            <span *ngIf="!fecha.valid && fecha.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="date"
+              class="form-control"
+              name="fecha"
+              #fecha="ngModel"
+              [(ngModel)]="postModeloEvento.fecha"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Cantidad de habitaciones</label>
+            <span
+              *ngIf="!cuartos.valid && cuartos.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="number"
+              class="form-control"
+              name="cuartos"
+              #cuartos="ngModel"
+              [(ngModel)]="postModelo.cuartos"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Nombre del Gerente</label>
+            <span
+              *ngIf="!gerente.valid && gerente.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="gerente"
+              #gerente="ngModel"
+              [(ngModel)]="postModelo.gerente"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Número de teléfono</label>
+            <span
+              *ngIf="!telefono.valid && telefono.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="number"
+              class="form-control"
+              name="telefono"
+              #telefono="ngModel"
+              [(ngModel)]="postModelo.telefono"
+              required
+            />
+          </div>
+
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Email</label>
+            <span *ngIf="!email.valid && email.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              #email="ngModel"
+              [(ngModel)]="postModelo.email"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
+            <label class="form-label">Password</label>
+            <span
+              *ngIf="!password.valid && password.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              #password="ngModel"
+              [(ngModel)]="postModelo.password"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="identidad.rol == 'ADMIN'"
+          [routerLink]="['/principal/administracion']"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss
+        >
+          Cancelar
+        </button>
+        <button
+          *ngIf="identidad.rol == 'HOTEL'"
+          [routerLink]="['/routerHotel/eventos']"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss
+        >
+          Cancelar
+        </button>
+        <button
+          *ngIf="identidad.rol == 'HOTEL'"
+          type="button"
+          data-bs-dismiss
+          class="btn btn-primary"
+          [disabled]="!agregarHotel.form.valid"
+          (click)="postEventos(agregarHotel)"
+        >
+          Agregar evento
+        </button>
+        <button
+          *ngIf="identidad.rol == 'ADMIN'"
+          type="button"
+          data-bs-dismiss
+          class="btn btn-primary"
+          [disabled]="!agregarHotel.form.valid"
+          (click)="postHotel(agregarHotel)"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
