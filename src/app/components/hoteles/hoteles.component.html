@@ -25,11 +25,14 @@
                 <div class="table-responsive">
                   <div class="title-cards">
                     <h2>Habitaciones</h2>
+                    <h3>Habitaciones disponibles: {{ hDisponibles }}</h3>
+                    <h3>Habitaciones reservadas: {{ hOcupados }}</h3>
                   </div>
 
                   <div class="wrap">
                     <div class="search">
                       <input
+                        [(ngModel)]="search"
                         type="text"
                         class="searchTerm"
                         placeholder="Buscar"
@@ -66,11 +69,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let cuartos of getModelo">
+                      <tr *ngFor="let cuartos of getModelo | busqueda: search">
                         <th scope="row">{{ cuartos.nombre }}</th>
                         <td>
                           <span>
-                            <span>{{ cuartos.espacio }}</span>
+                            <span>{{ cuartos.espacio }} personas</span>
                           </span>
                         </td>
                         <td>
@@ -85,18 +88,37 @@
                         </td>
                         <td>
                           <span>
-                            <span> <td *ngIf="!cuartos.idUsuario"></td></span>
+                            <span>
+                              <td
+                                *ngIf="
+                                  cuartos.idUsuario || cuartos.idUsuario != null
+                                "
+                              >
+                                {{ cuartos.idUsuario.nombre }}
+                                <button
+                                  (click)="verUsuario(cuartos.idUsuario._id)"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModalVerUsuario"
+                                  class="btn btn-outline-success"
+                                >
+                                  <i class="fa-solid fa-eye"></i>
+                                </button></td
+                            ></span>
                           </span>
-                        </td>
-                        <td>
                           <span>
                             <span>
-                              <td *ngIf="cuartos.idUsuario">
-                                {{ cuartos.idUsuario.nombre }}
+                              <td
+                                *ngIf="
+                                  !cuartos.idUsuario ||
+                                  cuartos.idUsuario == null
+                                "
+                              >
+                                Sin ocupante
                               </td></span
                             >
                           </span>
                         </td>
+
                         <td>
                           <span>
                             <span>
@@ -222,6 +244,105 @@
           (click)="postHabitacion(agregarCuarto)"
         >
           Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalVerUsuario"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Usuario hospedado</h5>
+      </div>
+      <div class="modal-body">
+        <div id="table" class="container emp-profile">
+          <form #editForm="ngForm" method="post">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="profile-img">
+                  <img
+                    class="rounded-circle mt-5"
+                    width="200px"
+                    src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="profile-head">
+                  <h5>
+                    <span class="font-weight-bold"
+                      >Nombre: {{ getUsuario.nombre }}</span
+                    >
+                  </h5>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                  <div
+                    class="tab-pane fade show active"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="home-tab"
+                  >
+                    <div class="row">
+                      <div class="col-md-5">
+                        <label>Correo</label>
+                      </div>
+                      <div class="col-md-6">
+                        <p>
+                          <input
+                            readonly
+                            type="text"
+                            class="form-control"
+                            name="email"
+                            #email="ngModel"
+                            required="true"
+                            [(ngModel)]="getUsuario.email"
+                          />
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-5">
+                        <label>Telefono</label>
+                      </div>
+                      <div class="col-md-6">
+                        <p>
+                          <input
+                            readonly
+                            type="number"
+                            class="form-control"
+                            name="telefono"
+                            #telefono="ngModel"
+                            required="true"
+                            [(ngModel)]="getUsuario.telefono"
+                          />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
         </button>
       </div>
     </div>

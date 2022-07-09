@@ -23,9 +23,6 @@ export class NavbarComponent implements OnInit {
     document.getElementById("services").scrollIntoView();
   }
 
-  toTeam(){
-    document.getElementById("team").scrollIntoView();
-  }
 
   ngOnInit(): void {}
 

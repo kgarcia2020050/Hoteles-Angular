@@ -15,8 +15,6 @@
               />
               <div class="mt-3">
                 <h4 [textContent]="this.getIdHotel.nombre"></h4>
-                <button id="btn" class="btn btn-primary">Editar</button>
-                <button class="btn btn-primary">Eliminar</button>
               </div>
             </div>
           </div>
@@ -62,36 +60,81 @@
                     >Habitaciones del hotel</i
                   >
                 </h6>
-                <div class="card-body">
+                <div
+                  *ngFor="
+                    let cuartos of getIdCuartos
+                      | paginate
+                        : { id: 'cuartos', itemsPerPage: 1, currentPage: page }
+                  "
+                  class="card-body"
+                >
                   <div class="row">
                     <div class="col-sm-4">
                       <h6 class="mb-0">Habitación</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ cuartos.nombre }}
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-4">
                       <h6 class="mb-0">Capacidad</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ cuartos.espacio }} personas
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Estado</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ cuartos.disponibilidad }}
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Precio</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      Q{{ cuartos.precio }}
+                    </div>
                   </div>
                   <hr />
+                  <a
+                    *ngIf="
+                      cuartos.verificar == true &&
+                      this.identidad.rol == 'USUARIO'
+                    "
+                    ><button
+                      (click)="getHabitacion(cuartos._id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                      class="btn btn-outline-success"
+                    >
+                      <i class="fa-solid fa-credit-card"></i></button
+                  ></a>
+                  <a
+                    *ngIf="
+                      cuartos.verificar == false &&
+                      this.identidad.rol == 'USUARIO'
+                    "
+                    ><button
+                      (click)="cuartoOcupado()"
+                      class="btn btn-outline-danger"
+                    >
+                      <i class="fa-solid fa-xmark"></i></button
+                  ></a>
                 </div>
+                <pagination-controls
+                  id="cuartos"
+                  (pageChange)="page = $event"
+                  previousLabel=""
+                  nextLabel=""
+                ></pagination-controls>
               </div>
             </div>
           </div>
@@ -101,36 +144,61 @@
                 <h6 class="d-flex align-items-center mb-3">
                   <i class="material-icons text-info mr-2">Eventos del hotel</i>
                 </h6>
-                <div class="card-body">
+                <div
+                  class="card-body"
+                  *ngFor="
+                    let eventos of getEventosModel
+                      | paginate
+                        : {
+                            id: 'eventos',
+                            itemsPerPage: 1,
+                            currentPage: pagina
+                          }
+                  "
+                >
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Nombre</h6>
+                      <h6 class="mb-0">Evento</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ eventos.nombre }}
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-4">
                       <h6 class="mb-0">Descripción</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ eventos.descripcion }}
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Lugar</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ eventos.lugar }}
+                    </div>
                   </div>
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Fecha</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">.</div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ eventos.fecha }}
+                    </div>
                   </div>
                   <hr />
                 </div>
+                <pagination-controls
+                  id="eventos"
+                  (pageChange)="pagina = $event"
+                  previousLabel=""
+                  nextLabel=""
+                ></pagination-controls>
               </div>
             </div>
           </div>
@@ -139,57 +207,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- <h1 [textContent]="this.getIdHotel.nombre"></h1>
-<h2>Habitaciones del hotel</h2>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Habitación</th>
-      <th scope="col">Capacidad</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Precio</th>
-      <th *ngIf="this.identidad.rol == 'USUARIO'" scope="col">Reservar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cuartos of getIdCuartos">
-      <td>{{ cuartos.nombre }}</td>
-      <td>{{ cuartos.espacio }} personas</td>
-      <td>{{ cuartos.disponibilidad }}</td>
-      <td>Q{{ cuartos.precio }}</td>
-
-      <td *ngIf="this.identidad.rol == 'USUARIO'">
-        <a *ngIf="cuartos.verificar == true"><button (click)="getHabitacion(cuartos._id)" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop" class="btn btn-outline-success">
-            <i class="fa-solid fa-credit-card"></i></button></a>
-        <a *ngIf="cuartos.verificar == false"><button (click)="cuartoOcupado()" class="btn btn-outline-danger">
-            <i class="fa-solid fa-xmark"></i></button></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Eventos del hotel</h3>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Nombre del evento</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Lugar</th>
-      <th scope="col">Fecha</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let eventos of getEventosModel">
-      <td>{{ eventos.nombre }}</td>
-      <td>{{ eventos.descripcion }}</td>
-      <td>{{ eventos.lugar }}</td>
-      <td>{{ eventos.fecha }}</td>
-    </tr>
-  </tbody>
-</table> -->
 
 <h3>Servicios que ofrecemos</h3>
 <table class="table">
@@ -223,41 +240,6 @@
   <section
     class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
   >
-    <!-- <footer class="text-center text-lg-start bg-light text-muted">
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
->>>>>>> 5c371efe45987635e35bdaee626b00b5e9ec9ab0
-    <div class="me-5 d-none d-lg-block"></div>
-  </section>
-
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <div class="row mt-3">
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>Nombre de nuestro hotel
-          </h6>
-          <p>{{ this.getIdHotel.nombre }}</p>
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">Contáctanos</h6>
-          <p><i class="fas fa-home me-3"></i>{{ this.getIdHotel.direccion }}</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            {{ this.getIdHotel.email }}
-          </p>
-          <p><i class="fas fa-phone me-3"></i>{{ this.getIdHotel.telefono }}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
-    © 2022 Copyright:
-    <a class="text-reset fw-bold">Gestor de hoteles</a>
-  </div>
-</footer> -->
-
     <!-- Factura -->
 
     <div

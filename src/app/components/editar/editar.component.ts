@@ -21,7 +21,11 @@ export class EditarComponent implements OnInit {
   public getHabitacion: Habitacion;
   public token;
   public libres;
-  public getHistorial: any;
+  public getHistorial: [{}];
+  public compras: any;
+  public factura: any;
+
+  public total: Number;
 
   constructor(
     private _usuarioService: UsuarioService,
@@ -29,18 +33,7 @@ export class EditarComponent implements OnInit {
     private _router: Router,
     public _activatedRoute: ActivatedRoute
   ) {
-    this.getIdModelo = new Entidad(
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      0,
-      '',
-      0,
-      ''
-    );
+    this.getIdModelo = new Entidad('', '', '', '', '', '', 0, '', 0, '');
     this.token = this._loginService.obtenerToken();
     this.identidad = JSON.parse(localStorage.getItem('identidad'));
   }
@@ -49,7 +42,16 @@ export class EditarComponent implements OnInit {
     this._activatedRoute.paramMap.subscribe((dataRuta) => {
       this.getPerfilId(dataRuta.get('ID'));
       this.misReservaciones(dataRuta.get('ID'));
-      this.historialHabitaciones(dataRuta.get('ID'));
+    });
+  }
+
+  verFactura(idUsuario) {
+    this._usuarioService.verFactura(idUsuario, this.token).subscribe({
+      next: (response: any) => {
+        this.factura = response.Compras;
+        this.compras = response.Compras.factura;
+        this.total = this.factura.total;
+      },
     });
   }
 
@@ -157,11 +159,28 @@ export class EditarComponent implements OnInit {
     });
   }
 
-  historialHabitaciones(idUsuario) {
+  pagar(idUsuario) {
+    this._usuarioService.pagar(idUsuario, this.token).subscribe({
+      next: (response: any) => {
+        Swal.fire({
+          icon: 'success',
+          text: 'Pagos realizados',
+        });
+        this.getPerfilId(idUsuario);
+      },
+      error: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          text: error.error.Error,
+        });
+      },
+    });
+  }
+
+  historial(idUsuario) {
     this._usuarioService.verHistorial(idUsuario, this.token).subscribe({
       next: (response: any) => {
-        this.getHistorial = response.Historial;
-        console.log(response.Historial);
+        this.getHistorial = response.Historial.historial;
       },
       error: (error: any) => {
         console.log(error);

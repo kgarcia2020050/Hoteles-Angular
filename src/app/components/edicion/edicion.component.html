@@ -1,118 +1,101 @@
+<app-navbar-vistas></app-navbar-vistas>
+
 <body>
-  <div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-      <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img
-            class="rounded-circle mt-5"
-            width="200px"
-            src="https://previews.123rf.com/images/darkink/darkink1705/darkink170500063/78443394-interior-de-la-habitaci%C3%B3n-del-hotel-interior-de-la-casa-de-dormitorio-con-cama-y-ventana-con-paisaje.jpg"
-          />
-        </div>
-      </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Modificar habitacion</h4>
+  <div id="table" class="container emp-profile">
+    <form #editForm="ngForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-img">
+            <img class="rounded-circle mt-5" width="200px"
+              src="https://previews.123rf.com/images/darkink/darkink1705/darkink170500063/78443394-interior-de-la-habitaci%C3%B3n-del-hotel-interior-de-la-casa-de-dormitorio-con-cama-y-ventana-con-paisaje.jpg" />
           </div>
-          <form #editForm="ngForm">
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <span
-                  *ngIf="!nombre.valid && nombre.touched"
-                  class="requiredField"
-                >
-                  Campo requerido
-                </span>
-                <label class="labels">Nombre de la habitacion</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="nombre"
-                  required="true"
-                  #nombre="ngModel"
-                  [(ngModel)]="getIdCuarto.nombre"
-                />
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-md-12">
-                <span
-                  *ngIf="!espacio.valid && espacio.touched"
-                  class="requiredField"
-                >
-                  Campo requerido
-                </span>
-                <label class="labels">Personas permitidas</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="espacio"
-                  #espacio="ngModel"
-                  required="true"
-                  [(ngModel)]="getIdCuarto.espacio"
-                />
-              </div>
-
-              <div class="col-md-12">
-                <span
-                  *ngIf="!disponibilidad.valid && disponibilidad.touched"
-                  class="requiredField"
-                >
-                  Campo requerido
-                </span>
-                <label class="labels">Estado</label>
-                <input
-                  readonly
-                  type="text"
-                  class="form-control"
-                  name="disponibilidad"
-                  #disponibilidad="ngModel"
-                  required="true"
-                  [(ngModel)]="getIdCuarto.disponibilidad"
-                />
-              </div>
-
-              <div class="col-md-12">
-                <span
-                  *ngIf="!precio.valid && precio.touched"
-                  class="requiredField"
-                >
-                  Campo requerido
-                </span>
-                <label class="labels">Precio</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="precio"
-                  #precio="ngModel"
-                  required="true"
-                  [(ngModel)]="getIdCuarto.precio"
-                />
-              </div>
-            </div>
-            <div class="mt-5 text-center">
-              <button
-                [disabled]="!editForm.form.valid"
-                class="btn btn-success profile-button"
-                type="button"
-                (click)="putHabitacion()"
-              >
-                Guardar cambios
-              </button>
-              <br />
-              <br />
-              <button
-                routerLink="/routerHotel/hoteles"
-                class="btn btn-primary"
-                type="button"
-              >
-                Regresar
-              </button>
-            </div>
-          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="profile-head">
+            <h5>
+              <span class="font-weight-bold">Modificar habitación</span>
+            </h5>
+            <h6>
+              Administrador del hotel
+            </h6>
+            <p class="proile-rating">OPCIONES : <span></span></p>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                  aria-selected="true">Editar perfil</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" type="button" routerLink="/routerHotel/hoteles">
+            Regresar
+          </button>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-5">
+                  <label>Nombre</label>
+                </div>
+                <div class="col-md-6">
+                  <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+                    Campo requerido
+                  </span>
+                  <p><input type="text" class="form-control" name="nombre" required="true" #nombre="ngModel"
+                      [(ngModel)]="getIdCuarto.nombre" /></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <label>Personas permitidas</label>
+                </div>
+                <div class="col-md-6">
+                  <span *ngIf="!espacio.valid && espacio.touched" class="requiredField">
+                    Campo requerido
+                  </span>
+                  <p><input type="number" class="form-control" name="espacio" #espacio="ngModel" required="true"
+                      [(ngModel)]="getIdCuarto.espacio" /></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <label>Estado</label>
+                </div>
+                <div class="col-md-6">
+                  <span *ngIf="!disponibilidad.valid && disponibilidad.touched" class="requiredField">
+                    Campo requerido
+                  </span>
+                  <p><input readonly type="text" class="form-control" name="disponibilidad" #disponibilidad="ngModel"
+                      required="true" [(ngModel)]="getIdCuarto.disponibilidad" /></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <label>Precio</label>
+                </div>
+                <div class="col-md-6">
+                  <span *ngIf="!precio.valid && precio.touched" class="requiredField">
+                    Campo requerido
+                  </span>
+                  <p><input type="number" class="form-control" name="precio" #precio="ngModel" required="true"
+                      [(ngModel)]="getIdCuarto.precio" /></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button [disabled]="!editForm.form.valid" id="btnAgregar" class="learn-more" (click)="putHabitacion()">
+            <span class="circle" aria-hidden="true">
+              <span class="icon arrow"></span>
+            </span>
+            <span class="button-text">Guardar</span>
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-</body>

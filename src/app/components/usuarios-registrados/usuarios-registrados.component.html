@@ -1,17 +1,51 @@
 <app-navbar-vistas></app-navbar-vistas>
 
+<div class="banner">
+  <div class="capa"></div>
+  <div class="info">
+    <h1>Usuarios registrados</h1>
+    <p>El administrador puede ver todos los usuarios registrados, Puede agregar a la base de datos un nuevo hotel y
+      Puede ver la estadística.</p>
+  </div>
+</div>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let usuarios of getModelo">
-      <td>{{ usuarios.nombre }}</td>
-      <td>{{ usuarios.email }}</td>
-    </tr>
-  </tbody>
-</table>
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2 >Usuarios </h2>
+                  </div>
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let usuarios of getModelo">
+                        <th scope="row">{{ usuarios.nombre }}</th>
+                        <td>
+                          <span>
+                            <span>{{ usuarios.email }}</span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

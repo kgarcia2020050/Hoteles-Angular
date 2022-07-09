@@ -1,79 +1,185 @@
 <app-navbar-vistas></app-navbar-vistas>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Nombre del evento</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Lugar</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let eventos of getEventosModel">
-      <td>{{ eventos.nombre }}</td>
-      <td>{{ eventos.descripcion }}</td>
-      <td>{{ eventos.lugar }}</td>
-      <td>{{ eventos.fecha }}</td>
-      <td>
-        <a
-          ><button
-            (click)="deleteEvento(eventos._id)"
-            class="btn btn-outline-danger"
-          >
-            <i class="fa-solid fa-trash"></i></button
-        ></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
-<button
-  id="ap"
-  class="btn btn-primary"
-  type="button"
-  [routerLink]="['/routerHotel/agendar', identidad._id]"
->
-  Agendar evento
-</button>
+<div class="banner">
+  <div class="capa"></div>
+  <div class="info">
+    <h1>Eventos y servicios</h1>
+    <p>
+      El administrador del hotel puede consultar todas las reservaciones hechas,
+      buscar a un usuario hospedado en su hotel, ver las habitaciones
+      disponibles y las facturas con todos los servicios.
+    </p>
+  </div>
+</div>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Nombre del servicio</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let servicio of getServicioHotel">
-      <td>{{ servicio.nombre }}</td>
-      <td>{{ servicio.descripcion }}</td>
-      <td>Q{{ servicio.precio }}</td>
-      <td>
-        <a
-          ><button
-            (click)="deleteServicio(servicio._id)"
-            class="btn btn-outline-danger"
-          >
-            <i class="fa-solid fa-trash"></i></button
-        ></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2>Eventos</h2>
+                  </div>
 
-<button
-  id="ap"
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#staticBackdrop"
->
-  Agregar servicio
-</button>
+                  <div class="wrap">
+                    <div class="search">
+                      <input
+                        [(ngModel)]="search"
+                        type="text"
+                        class="searchTerm"
+                        placeholder="Buscar"
+                      />
+                      <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
 
+                  <button
+                    id="ap"
+                    type="button"
+                    class="learn-more"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <span class="circle" aria-hidden="true">
+                      <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Agregar Evento</span>
+                  </button>
+
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre del evento</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col" scope="col">Lugar</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let eventos of getEventosModel | busqueda: search
+                        "
+                      >
+                        <th scope="row">{{ eventos.nombre }}</th>
+                        <td>
+                          <span>
+                            <span>{{ eventos.descripcion }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>{{ eventos.lugar }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>{{ eventos.fecha }}</span>
+                          </span>
+                        </td>
+                        <td>
+                          <span>
+                            <span>
+                              <a
+                                ><button
+                                  (click)="deleteEvento(eventos._id)"
+                                  class="btn btn-outline-danger"
+                                >
+                                  <i class="fa-solid fa-trash"></i></button></a
+                            ></span>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="title-cards">
+              <h2>Servicios</h2>
+            </div>
+
+            <button
+              id="ap"
+              type="button"
+              class="learn-more"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+              </span>
+              <span class="button-text">Agregar servicio</span>
+            </button>
+
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre del servicio</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let servicio of getServicioHotel">
+                  <th scope="row">{{ servicio.nombre }}</th>
+                  <td>
+                    <span>
+                      <span>{{ servicio.descripcion }}</span>
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <span>Q{{ servicio.precio }}</span>
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <span>
+                        <a
+                          ><button
+                            (click)="deleteServicio(servicio._id)"
+                            class="btn btn-outline-danger"
+                          >
+                            <i class="fa-solid fa-trash"></i></button></a
+                      ></span>
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <span></span>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal -->
 <div
   class="modal fade"
@@ -169,6 +275,101 @@
           class="btn btn-primary"
         >
           Listo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agendar evento</h5>
+      </div>
+      <div class="modal-body">
+        <form #agregarHotel="ngForm">
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Nombre del evento</label>
+            <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="nombre"
+              #nombre="ngModel"
+              [(ngModel)]="postModeloEvento.nombre"
+              required
+            />
+          </div>
+
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Descripcion</label>
+            <span
+              *ngIf="!descripcion.valid && descripcion.touched"
+              class="requiredField"
+            >
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="descripcion"
+              #descripcion="ngModel"
+              [(ngModel)]="postModeloEvento.descripcion"
+              required
+            />
+          </div>
+
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Lugar</label>
+            <span *ngIf="!lugar.valid && lugar.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              name="lugar"
+              #lugar="ngModel"
+              [(ngModel)]="postModeloEvento.lugar"
+              required
+            />
+          </div>
+          <div *ngIf="identidad.rol == 'HOTEL'" class="mb-3">
+            <label class="form-label">Fecha</label>
+            <span *ngIf="!fecha.valid && fecha.touched" class="requiredField">
+              Campo requerido
+            </span>
+            <input
+              type="date"
+              class="form-control"
+              name="fecha"
+              #fecha="ngModel"
+              [(ngModel)]="postModeloEvento.fecha"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          data-bs-dismiss="modal"
+          class="btn btn-primary"
+          [disabled]="!agregarHotel.form.valid"
+          (click)="postEventos(agregarHotel)"
+        >
+          Agregar evento
         </button>
       </div>
     </div>

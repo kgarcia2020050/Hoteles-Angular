@@ -18,7 +18,6 @@ import { VerificarUsuarioGuard } from './guards/verificar-usuario.guard';
 import { RouterUsuarioComponent } from './components/router-usuario/router-usuario.component';
 import { VerHotelComponent } from './components/ver-hotel/ver-hotel.component';
 import { EdicionComponent } from './components/edicion/edicion.component';
-import { AgregarComponent } from './components/agregar/agregar.component';
 import { FacturaComponent } from './components/factura/factura.component';
 
 const routes: Routes = [
@@ -35,7 +34,6 @@ const routes: Routes = [
       { path: 'editar/:ID', component: EditarComponent },
       { path: 'solicitados', component: GraficaHotelesComponent },
       { path: 'verHotel/:ID', component: VerHotelComponent },
-      { path: 'consumos/:ID', component: FacturaComponent },
     ],
   },
   {
@@ -47,7 +45,6 @@ const routes: Routes = [
       { path: 'eventos', component: EventosComponent },
       { path: 'editar/:ID', component: EditarComponent },
       { path: 'editarCuarto/:ID', component: EdicionComponent },
-      { path: 'agendar/:ID', component: AgregarComponent },
     ],
   },
   {
@@ -61,7 +58,6 @@ const routes: Routes = [
       { path: 'editar/:ID', component: EditarComponent },
       { path: 'editarHotel/:ID', component: EdicionComponent },
       { path: 'verHotel/:ID', component: VerHotelComponent },
-      { path: 'nuevo', component: AgregarComponent },
     ],
   },
 

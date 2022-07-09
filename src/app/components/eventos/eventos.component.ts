@@ -12,10 +12,12 @@ import { Servicio } from 'src/app/models/servicio';
   providers: [LoginService, HotelService],
 })
 export class EventosComponent implements OnInit {
+  public postModeloEvento: Eventos;
   public token;
   public getEventosModel: Eventos;
   public identidad;
   public getServicioHotel: Servicio;
+  public search
 
   public postServicios: Servicio;
 
@@ -23,6 +25,7 @@ export class EventosComponent implements OnInit {
     private _loginService: LoginService,
     private _hotelService: HotelService
   ) {
+    this.postModeloEvento = new Eventos('', '', '', '', '','');
     this.postServicios = new Servicio('', '', '', 0, '');
     this.token = this._loginService.obtenerToken();
     this.identidad = JSON.parse(localStorage.getItem('identidad'));
@@ -65,6 +68,24 @@ export class EventosComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  postEventos(agregarHotel) {
+    this._hotelService
+      .agregarEvento(this.postModeloEvento, this.token)
+      .subscribe({
+        next: (response: any) => {
+          agregarHotel.reset();
+          this.getEventos();
+        },
+        error: (error: any) => {
+          Swal.fire({
+            icon:"error",
+            title:"Error",
+            text:error.error.Error,
+          })
+        },
+      });
   }
 
   deleteServicio(idServicio) {

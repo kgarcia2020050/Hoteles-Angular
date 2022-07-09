@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -25,7 +27,6 @@ import { RouterModule, Routes, ExtraOptions } from '@angular/router';
 import { RouterUsuarioComponent } from './components/router-usuario/router-usuario.component';
 import { VerHotelComponent } from './components/ver-hotel/ver-hotel.component';
 import { EdicionComponent } from './components/edicion/edicion.component';
-import { AgregarComponent } from './components/agregar/agregar.component';
 import { FacturaComponent } from './components/factura/factura.component';
 
 
@@ -56,10 +57,9 @@ const routerOptions: ExtraOptions = {
     RouterUsuarioComponent,
     VerHotelComponent,
     EdicionComponent,
-    AgregarComponent,
     FacturaComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,ChartsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,ChartsModule,NgxPaginationModule],
   providers: [],
   bootstrap: [AppComponent],
 })

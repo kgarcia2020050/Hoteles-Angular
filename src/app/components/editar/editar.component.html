@@ -39,7 +39,12 @@
                 >Nombre: {{ getIdModelo.nombre }}</span
               >
             </h5>
-            <h6 *ngIf="this.identidad.rol == 'ADMIN'">Administrador de la aplicación</h6>
+            <h6 *ngIf="this.identidad.rol == 'ADMIN'">
+              Administrador de la aplicación
+            </h6>
+            <h6 *ngIf="this.identidad.rol == 'HOTEL'">
+              Administrador deL hotel
+            </h6>
             <p class="proile-rating">OPCIONES : <span></span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
@@ -58,12 +63,15 @@
         </div>
         <div class="col-md-2">
           <button
-            *ngIf="getIdModelo.rol == 'ADMIN'"
-            routerLink="/principal/administracion"
+            *ngIf="getIdModelo.rol == 'USUARIO'"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling"
             class="btn btn-primary"
             type="button"
+            (click)="historial(this.identidad._id)"
           >
-            Regresar
+            Servicios
           </button>
         </div>
       </div>
@@ -83,6 +91,9 @@
                 </div>
                 <div class="col-md-6">
                   <p>
+                    <span *ngIf="!nombre.valid && nombre.touched"
+                      >Campo requerido</span
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -100,6 +111,9 @@
                 </div>
                 <div class="col-md-6">
                   <p>
+                    <span *ngIf="!email.valid && email.touched"
+                      >Campo requerido</span
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -111,12 +125,15 @@
                   </p>
                 </div>
               </div>
-              <div class="row">
+              <div *ngIf="this.identidad.rol == 'HOTEL'" class="row">
                 <div class="col-md-5">
                   <label>Direccion</label>
                 </div>
                 <div class="col-md-6">
                   <p>
+                    <span *ngIf="!direccion.valid && direccion.touched"
+                      >Campo requerido</span
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -129,12 +146,15 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div *ngIf="this.identidad.rol == 'HOTEL'" class="row">
                 <div class="col-md-5">
                   <label>Gerente</label>
                 </div>
                 <div class="col-md-6">
                   <p>
+                    <span *ngIf="!gerente.valid && gerente.touched"
+                      >Campo requerido</span
+                    >
                     <input
                       type="text"
                       class="form-control"
@@ -147,12 +167,21 @@
                 </div>
               </div>
 
-              <div *ngIf="this.identidad.rol == 'USUARIO'||this.identidad.rol == 'HOTEL'" class="row">
+              <div
+                *ngIf="
+                  this.identidad.rol == 'USUARIO' ||
+                  this.identidad.rol == 'HOTEL'
+                "
+                class="row"
+              >
                 <div class="col-md-5">
                   <label>Telefono</label>
                 </div>
                 <div class="col-md-6">
                   <p>
+                    <span *ngIf="!telefono.valid && telefono.touched"
+                      >Campo requerido</span
+                    >
                     <input
                       type="number"
                       class="form-control"
@@ -164,7 +193,10 @@
                   </p>
                 </div>
               </div>
-              <div class="row" *ngIf="this.identidad.rol=='HOTEL'&&this.libres==0">
+              <div
+                class="row"
+                *ngIf="this.identidad.rol == 'HOTEL' && this.libres == 0"
+              >
                 <div class="col-md-5">
                   <label>Agregar habitaciones</label>
                 </div>
@@ -173,15 +205,14 @@
                     <input
                       type="text"
                       class="form-control"
-                      name="email"
-                      #email="ngModel"
+                      name="cuartos"
+                      #cuartos="ngModel"
                       required="true"
                       [(ngModel)]="getIdModelo.cuartos"
                     />
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
           <button
@@ -195,16 +226,37 @@
             </span>
             <span class="button-text">Guardar</span>
           </button>
+          <button
+            *ngIf="this.identidad.rol == 'USUARIO'"
+            (click)="eliminarPerfil()"
+            id="btnAgregar"
+            class="learn-more"
+          >
+            <span class="circle" aria-hidden="true">
+              <span class="icon arrow"></span>
+            </span>
+            <span class="button-text">Borrar perfil</span>
+          </button>
+          <button
+            (click)="verFactura(this.identidad._id)"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            *ngIf="this.identidad.rol == 'USUARIO'"
+            id="btnAgregar"
+            class="learn-more"
+          >
+            <span class="circle" aria-hidden="true">
+              <span class="icon arrow"></span>
+            </span>
+            <span class="button-text">Factura</span>
+          </button>
         </div>
       </div>
     </form>
   </div>
-
 </body>
 
 <body>
-
-
   <h3 *ngIf="this.identidad.rol == 'USUARIO'">Mis reservaciones actuales</h3>
 
   <div *ngIf="this.identidad.rol == 'USUARIO'">
@@ -236,22 +288,97 @@
     </div>
   </div>
 
-  <h3 *ngIf="this.identidad.rol == 'USUARIO'">Historial de hospedaje</h3>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Mis consumos</h5>
+        </div>
+        <div class="modal-body">
+          <div class="text-right">
+            <button
+              data-bs-dismiss="modal"
+              class="btn btn-primary"
+              type="button"
+            >
+              Cancelar
+            </button>
+          </div>
 
-  <div *ngIf="this.identidad.rol == 'USUARIO'">
+          <div class="px-4 py-5">
+            <h5 class="text-uppercase">{{ this.identidad.nombre }}</h5>
+
+            <h4 class="mt-5 theme-color mb-5">Gracias por elegirnos.</h4>
+
+            <span class="theme-color">Detalle de compras</span>
+            <div class="mb-3">
+              <hr class="new1" />
+            </div>
+
+            <div
+              *ngFor="let productos of this.compras"
+              class="d-flex justify-content-between"
+            >
+              <span class="font-weight-bold">{{ productos.compra }}</span>
+              <span class="text-muted">{{ productos.precio }}</span>
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+              <span class="font-weight-bold">Total</span>
+              <span class="font-weight-bold theme-color"
+                >Q{{ this.total }}</span
+              >
+            </div>
+
+            <div class="text-center mt-5">
+              <button data-bs-dismiss="modal" (click)="pagar(this.identidad._id)" class="btn btn-primary">Paga tu factura</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<div
+  class="offcanvas offcanvas-end"
+  data-bs-scroll="true"
+  data-bs-backdrop="false"
+  tabindex="-1"
+  id="offcanvasScrolling"
+  aria-labelledby="offcanvasScrollingLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+      Historial de servicios
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
     <div class="table-responsive">
       <table class="table table-hover table-bordered table-info border-primary">
         <thead>
           <tr>
-            <th scope="col">Hotel</th>
+            <th scope="col">Servicios</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let info of getHistorial">
-            <td>{{ info.idHotel.nombre }}</td>
+            <td>{{info.nombre}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-</body>
+</div>

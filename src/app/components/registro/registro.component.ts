@@ -13,9 +13,8 @@ import { Router } from '@angular/router';
 export class RegistroComponent implements OnInit {
   public postModelo: Entidad;
 
-
   constructor(private _loginService: LoginService, private _router: Router) {
-    this.postModelo = new Entidad('', '', '', '', '', '', 0, '',0,'');
+    this.postModelo = new Entidad('', '', '', '', '', '', 0, '', 0, '');
   }
 
   ngOnInit(): void {
@@ -26,7 +25,12 @@ export class RegistroComponent implements OnInit {
     this._loginService.registroUsuarios(this.postModelo).subscribe(
       (response) => {
         console.log(response);
-        this._router.navigate(['/login']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Te has registrado exitosamente',
+        }).then((redireccionar) => {
+          this._router.navigate(['/login']);
+        });
       },
       (error) => {
         console.log(<any>error);

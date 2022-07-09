@@ -103,4 +103,20 @@ export class HotelService {
       headers: headersToken,
     });
   }
+
+  disponibles(token): Observable<any> {
+    let Id = this.identidad._id;
+    let headersToken = this.headersVariable.set('Authorization', token);
+    return this._http.get(this.url + '/disponibles/' + Id, {
+      headers: headersToken,
+    });
+  }
+
+  reservadas(token): Observable<any> {
+    let Id = this.identidad._id;
+    let headersToken = this.headersVariable.set('Authorization', token);
+    return this._http.get(this.url + '/reservadas/' + Id, {
+      headers: headersToken,
+    });
+  }
 }
