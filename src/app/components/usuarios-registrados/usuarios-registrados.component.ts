@@ -13,7 +13,7 @@ import { AdministracionService } from 'src/app/services/administracion.service';
 export class UsuariosRegistradosComponent implements OnInit {
   public getModelo: Entidad;
   public token;
-
+  
 
   constructor(
     private _adminService: AdministracionService,
@@ -40,7 +40,7 @@ export class UsuariosRegistradosComponent implements OnInit {
     });
   }
 
-  
+
 
 
 }
