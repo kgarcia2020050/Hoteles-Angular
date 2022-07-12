@@ -19,11 +19,15 @@ import { RouterUsuarioComponent } from './components/router-usuario/router-usuar
 import { VerHotelComponent } from './components/ver-hotel/ver-hotel.component';
 import { EdicionComponent } from './components/edicion/edicion.component';
 import { FacturaComponent } from './components/factura/factura.component';
+import { ListaHotelesComponent } from './components/lista-hoteles/lista-hoteles.component';
+import { HotelEspecificoComponent } from './components/hotel-especifico/hotel-especifico.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'inicio', component: InicioComponent },
+  { path: 'listadoHoteles', component: ListaHotelesComponent },
+  { path: 'hotelEspecifico/:ID', component: HotelEspecificoComponent },
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
     path: 'routerUsuario',

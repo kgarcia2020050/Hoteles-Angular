@@ -10,7 +10,7 @@ import { Servicio } from '../models/servicio';
   providedIn: 'root',
 })
 export class HotelService {
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://gestion-hoteles.herokuapp.com/api';
   public headersVariable = new HttpHeaders().set(
     'Content-Type',
     'application/json'

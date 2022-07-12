@@ -8,7 +8,7 @@ import { Entidad } from '../models/entidad.model';
   providedIn: 'root',
 })
 export class UsuarioService {
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://gestion-hoteles.herokuapp.com/api';
   public headersVariable = new HttpHeaders().set(
     'Content-Type',
     'application/json'
@@ -57,6 +57,10 @@ export class UsuarioService {
     return this._http.get(this.url + '/verCuarto/' + id, {
       headers: headersToken,
     });
+  }
+
+  eventosDelHotel(id: String): Observable<any> {
+    return this._http.get(this.url + '/eventosHotel/' + id);
   }
 
   reservaciones(id: String, token): Observable<any> {
@@ -130,5 +134,9 @@ export class UsuarioService {
     return this._http.put(this.url + '/facturar/' + ID, '', {
       headers: headersToken,
     });
+  }
+
+  hotelEspecifico(id: String): Observable<any> {
+    return this._http.get(this.url + '/hotelEspecifico/' + id);
   }
 }

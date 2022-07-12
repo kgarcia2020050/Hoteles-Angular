@@ -19,8 +19,8 @@ export class VerHotelComponent implements OnInit {
   public getIdCuartos: Habitacion;
   public getIdCuarto: Habitacion;
   public getEventosModel: Eventos;
-  public page:Number;
-  public pagina:Number;
+  public page: Number;
+  public pagina: Number;
 
   public getServicios: Servicio;
 

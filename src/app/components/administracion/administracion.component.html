@@ -1,6 +1,6 @@
 <app-navbar-vistas></app-navbar-vistas>
 
-<div class="banner" *ngIf="this.identidad.rol == 'ADMIN'">
+<div class="banner" *ngIf="this.identidad.rol == 'ADMIN' && this.identidad">
   <div class="capa"></div>
   <div class="info">
     <h1>Bienvenido Administrador</h1>
@@ -118,10 +118,6 @@
                                   hoteles._id
                                 ]"
                                 class="btn btn-success"
-                                [routerLink]="[
-                                  '/principal/verHotel',
-                                  hoteles._id
-                                ]"
                               >
                                 Ver hotel &gt;
                               </div>

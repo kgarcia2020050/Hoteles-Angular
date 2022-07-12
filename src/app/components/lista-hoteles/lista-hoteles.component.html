@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2>Hoteles</h2>
+                  </div>
+
+                  <div class="wrap">
+                    <div class="search">
+                      <input
+                        [(ngModel)]="search"
+                        type="text"
+                        class="searchTerm"
+                        placeholder="Buscar"
+                      />
+                      <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <section class="search-container">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-12 px-4">
+                          <div class="row mt-3">
+                            <div class="col-md-6 align-self-center"></div>
+                            <div class="col-md-6">
+                              <div class="form-inline"></div>
+                            </div>
+                          </div>
+                          <div
+                            class="row search-card-result"
+                            *ngFor="let hoteles of getModelo | busqueda: search"
+                          >
+                            <div class="col-md-3">
+                              <img
+                                class="img-fluid"
+                                src="http://placeimg.com/640/640/arch"
+                                alt="Card image cap"
+                              />
+                            </div>
+                            <div class="col-md-5">
+                              <h5>{{ hoteles.nombre }}</h5>
+                              <div class="review">
+                                <span class="fa fa-star checked"></span
+                                ><span class="fa fa-star checked"></span
+                                ><span class="fa fa-star checked"></span
+                                ><span class="fa fa-star"></span
+                                ><span class="fa fa-star"></span>
+                              </div>
+                              <p class="border-top additional">
+                                Gerente: {{ hoteles.gerente }}
+                              </p>
+                              <p>Teléfono: {{ hoteles.telefono }}</p>
+                              <p>
+                                <i class="p-3 fa fa-bath"></i
+                                ><i class="p-3 fa fa-phone"></i
+                                ><i class="p-3 fa fa-wifi"></i
+                                ><i class="p-3 fa fa-tv"></i>
+                              </p>
+                            </div>
+                            <div
+                              class="gy-4 col-md-2 border-left text-center more-offers"
+                            ></div>
+                            <div
+                              class="gy-4 col-md-2 border-left text-center more-offers"
+                            >
+                              <div
+                                (click)="verHotel(hoteles._id)"
+                                class="btn btn-success"
+                              >
+                                Ver hotel &gt;
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
