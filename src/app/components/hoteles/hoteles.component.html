@@ -13,7 +13,6 @@
 </div>
 
 <!------------------------>
-
 <section class="intro">
   <div class="bg-image h-100">
     <div class="mask d-flex align-items-center h-100">
@@ -25,32 +24,45 @@
                 <div class="table-responsive">
                   <div class="title-cards">
                     <h2>Habitaciones</h2>
-                    <h3>Habitaciones disponibles: {{ hDisponibles }}</h3>
-                    <h3>Habitaciones reservadas: {{ hOcupados }}</h3>
+                    <div class="disponibilidad">
+                      <div class="item item--3">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                          class="bi bi-bookmark-check" viewBox="0 0 16 16">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path fill="rgba(66,193,110,1)"
+                            d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                          <path fill="rgba(66,193,110,1)"
+                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                        </svg>
+                        <span class="quantity"> {{ hDisponibles }} </span>
+                        <span class="text text--3"> Habitaciones disponibles </span>
+                      </div>
+                      <div class="item item--4">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                          class="bi bi-bookmark-dash" viewBox="0 0 16 16">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path fill="rgba(220,91,183,1)" fill-rule="evenodd"
+                            d="M5.5 6.5A.5.5 0 0 1 6 6h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                          <path fill="rgba(220,91,183,1)"
+                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                        </svg>
+                        <span class="quantity"> {{ hOcupados }} </span>
+                        <span class="text text--4"> Habitaciones reservadas </span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="wrap">
                     <div class="search">
-                      <input
-                        [(ngModel)]="search"
-                        type="text"
-                        class="searchTerm"
-                        placeholder="Buscar"
-                      />
+                      <input [(ngModel)]="search" type="text" class="searchTerm" placeholder="Buscar" />
                       <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                       </button>
                     </div>
                   </div>
 
-                  <button
-                    id="ap"
-                    type="button"
-                    class="learn-more"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalAgregarCuarto"
-                    data-bs-toggle="modal"
-                  >
+                  <button id="ap" type="button" class="learn-more" data-bs-toggle="modal"
+                    data-bs-target="#modalAgregarCuarto" data-bs-toggle="modal">
                     <span class="circle" aria-hidden="true">
                       <span class="icon arrow"></span>
                     </span>
@@ -89,49 +101,36 @@
                         <td>
                           <span>
                             <span>
-                              <td
-                                *ngIf="
+                        <td *ngIf="
                                   cuartos.idUsuario || cuartos.idUsuario != null
-                                "
-                              >
-                                {{ cuartos.idUsuario.nombre }}
-                                <button
-                                  (click)="verUsuario(cuartos.idUsuario._id)"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#exampleModalVerUsuario"
-                                  class="btn btn-outline-success"
-                                >
-                                  <i class="fa-solid fa-eye"></i>
-                                </button></td
-                            ></span>
-                          </span>
+                                ">
+                          {{ cuartos.idUsuario.nombre }}
+                          <button (click)="verUsuario(cuartos.idUsuario._id)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalVerUsuario" class="btn btn-outline-success">
+                            <i class="fa-solid fa-eye"></i>
+                          </button>
+                        </td></span>
+                        </span>
+                        <span>
                           <span>
-                            <span>
-                              <td
-                                *ngIf="
+                            <td *ngIf="
                                   !cuartos.idUsuario ||
                                   cuartos.idUsuario == null
-                                "
-                              >
-                                Sin ocupante
-                              </td></span
-                            >
+                                ">
+                              Sin ocupante
+                            </td>
                           </span>
+                        </span>
                         </td>
 
                         <td>
                           <span>
                             <span>
-                              <a
-                                ><button
-                                  [routerLink]="[
+                              <a><button [routerLink]="[
                                     '/routerHotel/editarCuarto',
                                     cuartos._id
-                                  ]"
-                                  class="btn btn-outline-primary"
-                                >
-                                  <i class="fa-solid fa-pen"></i></button
-                              ></a>
+                                  ]" class="btn btn-outline-primary">
+                                  <i class="fa-solid fa-pen"></i></button></a>
                             </span>
                           </span>
                         </td>
@@ -148,23 +147,12 @@
   </div>
 </section>
 
-<div
-  class="modal fade"
-  id="modalAgregarCuarto"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="modalAgregarCuarto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Nuevo cuarto</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form #agregarCuarto="ngForm">
@@ -173,62 +161,32 @@
             <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
               Campo requerido
             </span>
-            <input
-              type="text"
-              class="form-control"
-              name="nombre"
-              #nombre="ngModel"
-              [(ngModel)]="postModelo.nombre"
-              required
-            />
+            <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="postModelo.nombre"
+              required />
           </div>
           <div class="mb-3">
             <label class="form-label">Espacio de personas</label>
-            <span
-              *ngIf="!espacio.valid && espacio.touched"
-              class="requiredField"
-            >
+            <span *ngIf="!espacio.valid && espacio.touched" class="requiredField">
               Campo requerido
             </span>
-            <input
-              type="number"
-              class="form-control"
-              name="espacio"
-              #espacio="ngModel"
-              [(ngModel)]="postModelo.espacio"
-              required
-            />
+            <input type="number" class="form-control" name="espacio" #espacio="ngModel" [(ngModel)]="postModelo.espacio"
+              required />
           </div>
           <div class="mb-3">
             <label class="form-label">Descripcion</label>
-            <span
-              *ngIf="!descripcion.valid && descripcion.touched"
-              class="requiredField"
-            >
+            <span *ngIf="!descripcion.valid && descripcion.touched" class="requiredField">
               Campo requerido
             </span>
-            <input
-              type="text"
-              class="form-control"
-              name="descripcion"
-              #descripcion="ngModel"
-              [(ngModel)]="postModelo.descripcion"
-              required
-            />
+            <input type="text" class="form-control" name="descripcion" #descripcion="ngModel"
+              [(ngModel)]="postModelo.descripcion" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Precio</label>
             <span *ngIf="!precio.valid && precio.touched" class="requiredField">
               Campo requerido
             </span>
-            <input
-              type="number"
-              class="form-control"
-              name="precio"
-              #precio="ngModel"
-              [(ngModel)]="postModelo.precio"
-              required
-            />
+            <input type="number" class="form-control" name="precio" #precio="ngModel" [(ngModel)]="postModelo.precio"
+              required />
           </div>
         </form>
       </div>
@@ -236,13 +194,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cancelar
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          [disabled]="!agregarCuarto.form.valid"
-          (click)="postHabitacion(agregarCuarto)"
-        >
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!agregarCuarto.form.valid"
+          (click)="postHabitacion(agregarCuarto)">
           Agregar
         </button>
       </div>
@@ -250,101 +203,32 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  id="exampleModalVerUsuario"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModalVerUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Usuario hospedado</h5>
-      </div>
-      <div class="modal-body">
-        <div id="table" class="container emp-profile">
-          <form #editForm="ngForm" method="post">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="profile-img">
-                  <img
-                    class="rounded-circle mt-5"
-                    width="200px"
-                    src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="profile-head">
-                  <h5>
-                    <span class="font-weight-bold"
-                      >Nombre: {{ getUsuario.nombre }}</span
-                    >
-                  </h5>
-                </div>
-              </div>
-              <div class="col-md-2"></div>
-            </div>
-            <div class="row">
-              <div class="col-md-4"></div>
-              <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                  <div
-                    class="tab-pane fade show active"
-                    id="home"
-                    role="tabpanel"
-                    aria-labelledby="home-tab"
-                  >
-                    <div class="row">
-                      <div class="col-md-5">
-                        <label>Correo</label>
-                      </div>
-                      <div class="col-md-6">
-                        <p>
-                          <input
-                            readonly
-                            type="text"
-                            class="form-control"
-                            name="email"
-                            #email="ngModel"
-                            required="true"
-                            [(ngModel)]="getUsuario.email"
-                          />
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-5">
-                        <label>Telefono</label>
-                      </div>
-                      <div class="col-md-6">
-                        <p>
-                          <input
-                            readonly
-                            type="number"
-                            class="form-control"
-                            name="telefono"
-                            #telefono="ngModel"
-                            required="true"
-                            [(ngModel)]="getUsuario.telefono"
-                          />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+    <!-- inicio prueba  -->
+    <div class="content">
+      <header id="cover-page">
+        <div class="bg-cover-opacity"></div>
+        <div class="informations">
+        </div>
+        <h1 class="name">{{ getUsuario.nombre }}</h1>
+        <img class="perfil" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"
+          alt="Perfil" />
+      </header>
+      <div class="messages">
+        <div class="history-message">
+          <img class="pic-message" src="https://cdn-icons-png.flaticon.com/512/270/270021.png" alt="" />
+          <h4>{{getUsuario.email}}</h4>
+          <p>Correo</p>
+        </div>
+        <div class="history-message">
+          <img class="pic-message" src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="" />
+          <h4>{{getUsuario.telefono}}</h4>
+          <p>Número de teléfono</p>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cerrar
-        </button>
-      </div>
     </div>
+
   </div>
 </div>

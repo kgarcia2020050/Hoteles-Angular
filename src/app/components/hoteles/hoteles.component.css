@@ -15,6 +15,12 @@ table th {
 .card {
   border-radius: .5rem;
 }
+
+/* modal */
+.modal-content{
+  background:    #d4e6f1 ;
+}
+
 /*search*/
 .intro{
   margin-bottom: 100px;
@@ -210,3 +216,300 @@ table th {
 	line-height: 1.7;
 	margin-bottom: 30px;
 }
+
+/* perfil usuario */
+
+.content {
+  background: #FAF7F3;
+  width: 320px;
+  height: 460px;
+  margin: 2% auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+header#cover-page {
+  background: url("https://static.pexels.com/photos/93013/pexels-photo-93013-large.jpeg");
+  width: 100%;
+  height: 295px;
+  position: relative;
+}
+header#cover-page .bg-cover-opacity {
+  background: linear-gradient(to left, #70e1f5, #ffd194);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 9;
+}
+header#cover-page .informations {
+  width: 100%;
+  height: 60px;
+}
+
+.name {
+  font-size: 1.8em;
+  font-family: "Ubuntu", sans-serif;
+  color: #fff;
+  text-align: center;
+  margin: 1%;
+}
+
+.status {
+  font-size: 0.8em;
+  font-family: "Ubuntu", sans-serif;
+  color: #16a085;
+  text-align: center;
+}
+
+.status span {
+  background: #16a085;
+  width: 10px;
+  height: 10px;
+  top: 11px;
+  left: 125px;
+  border-radius: 50%;
+  position: relative;
+  display: block;
+}
+
+.slogan {
+  font-size: 0.8em;
+  font-family: "Ubuntu", sans-serif;
+  color: rgba(236, 240, 241, 0.8);
+  text-align: center;
+  margin: 2%;
+}
+
+.slogan span {
+  top: 13px;
+  left: -20px;
+  fill: white;
+  position: relative;
+  display: block;
+}
+
+#status {
+  background: none;
+  width: 50%;
+  height: 30px;
+  margin-left: 25%;
+  font-size: 1em;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid black;
+  transition: 0.5s ease-in-out;
+  display: none;
+}
+#status option:first-child {
+  background-color: none;
+  color: green;
+  border-bottom: 1px solid green;
+}
+#status option:nth-child(2) {
+  color: red;
+}
+#status option:nth-child(3) {
+  color: yellow;
+}
+
+img.perfil {
+  width: 120px;
+  height: 120px;
+  margin: 7% auto;
+  border-radius: 50%;
+  left: 100px;
+  box-shadow: 0px 0px 15px #78808d;
+  z-index: 99;
+  position: absolute;
+}
+
+.notification {
+  width: 100%;
+  height: 50px;
+}
+.notification .icon {
+  width: 25%;
+  height: 50px;
+  text-align: center;
+  float: left;
+  fill: #78808D;
+}
+.notification .icon svg {
+  margin-top: 10%;
+}
+.notification .selected {
+  background: rgba(122, 171, 174, 0.1);
+}
+
+.messages, .box-of-notifications {
+  background: rgba(122, 171, 174, 0.1);
+  width: 100%;
+  height: 245px;
+  padding-top: 2%;
+  display: block;
+}
+.messages .history-message, .box-of-notifications .history-message {
+  width: 90%;
+  height: 70px;
+  margin: 2% 5%;
+  border-bottom: 1px solid rgba(120, 128, 141, 0.2);
+  position: relative;
+}
+.messages .history-message .pic-message, .box-of-notifications .history-message .pic-message {
+  width: 60px;
+  height: 60px;
+  margin: 0 3%;
+  border-radius: 50%;
+  float: left;
+}
+.messages .history-message h4, .box-of-notifications .history-message h4 {
+  font-size: 1.2em;
+  font-family: "Ubuntu", sans-serif;
+  color: #767e8a;
+  top: 10%;
+  position: relative;
+}
+.messages .history-message p, .box-of-notifications .history-message p {
+  font-size: 0.8em;
+  font-family: "Ubuntu", sans-serif;
+  color: rgba(118, 126, 138, 0.7);
+  top: 20%;
+  position: relative;
+}
+
+.box-of-notifications {
+  display: none;
+}
+.box-of-notifications .notification {
+  width: 100%;
+  height: 74px;
+  border-bottom: 1px solid #CFD8DC;
+}
+.box-of-notifications .notification .pic-perfil {
+  width: 65px;
+  height: 65px;
+  margin: 2px 5px;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+  box-shadow: 4px 4px 5px #B6B6B6;
+}
+.box-of-notifications .notification .pic-perfil img {
+  height: 100%;
+  transform: scale(1.2);
+}
+.box-of-notifications .notification p {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8em;
+  color: #727272;
+  line-height: 1.5;
+  padding: 1% 1% 1% 25%;
+}
+.box-of-notifications .notification p strong {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.box-of-notifications .notification .date {
+  font-family: "Ubuntu", sans-serif;
+  color: #727272;
+  font-size: 0.7em;
+  margin-left: 3%;
+}
+.box-of-notifications .notification .btn-wrapper {
+  width: 50%;
+  margin: 2% auto;
+}
+.box-of-notifications .notification .btn-wrapper .accepted, .box-of-notifications .notification .btn-wrapper .dont {
+  width: 40%;
+  background: #009688;
+  padding: 1% 2% 1% 2%;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8em;
+  color: #fff;
+  display: inline;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 2px 2px 2px #B6B6B6;
+}
+.box-of-notifications .notification .btn-wrapper .dont {
+  background: #D32F2F;
+}
+
+/* info */
+.disponibilidad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+ }
+
+ .disponibilidad .item {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .item:hover {
+  transform: scale(0.95);
+  transition: all 0.3s;
+ }
+
+ .item svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 7px;
+ }
+
+ .item--1 {
+  background: #c7c7ff;
+ }
+
+ .item--2 {
+  background: #ffd8be;
+ }
+
+ .item--3 {
+  background: #a9ecbf;
+ }
+
+ .item--4 {
+  background: #f3bbe1;
+ }
+
+ .quantity {
+  font-size: 25px;
+  font-weight: 600;
+ }
+
+ .text {
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: 600;
+ }
+
+ .text--1 {
+  color: rgba(149,149,255,1);
+ }
+
+ .text--2 {
+  color: rgba(252,161,71,1);
+ }
+
+ .text--3 {
+  color: rgba(66,193,110,1);
+ }
+
+ .text--4 {
+  color: rgba(220,91,183,1);
+ }

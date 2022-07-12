@@ -1,16 +1,16 @@
 <app-navbar-vistas></app-navbar-vistas>
 
-<div *ngIf="solicitadosModel" style="display: block">
-  <h1>Hoteles con mayor demanda</h1>
-  <canvas
-    baseChart
-    chartType="pie"
-    [data]="chartData"
-    [colors]="chartColors"
-    [labels]="chartLabels"
-    [options]="chartOptions"
-    [plugins]="chartPlugins"
-    [legend]="chartLegend"
-  >
+<div class="banner">
+  <div class="capa"></div>
+  <div class="info">
+    <h1>Hoteles con mayor demanda</h1>
+    <p>El administrador puede ver todos los usuarios registrados, Puede agregar a la base de datos un nuevo hotel y
+      Puede ver la estadística.</p>
+  </div>
+</div>
+
+<div id="fondografica" *ngIf="solicitadosModel">
+  <canvas id="grafica" baseChart chartType="pie" [data]="chartData" [colors]="chartColors" [labels]="chartLabels"
+    [options]="chartOptions" [plugins]="chartPlugins" [legend]="chartLegend">
   </canvas>
 </div>

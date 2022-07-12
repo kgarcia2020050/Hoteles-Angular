@@ -15,6 +15,12 @@ table th {
 .card {
   border-radius: .5rem;
 }
+
+/* modal */
+.modal-content{
+  background:    #d4e6f1 ;
+}
+
 /*search*/
 .intro{
   margin-bottom: 100px;

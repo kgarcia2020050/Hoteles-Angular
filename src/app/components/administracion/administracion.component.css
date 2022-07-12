@@ -11,6 +11,10 @@ table th {
   white-space: nowrap;
   overflow: hidden;
 }
+/* modal */
+.modal-content{
+  background:#d4e6f1 ;
+}
 
 .card {
   border-radius: .5rem;

@@ -1,6 +1,6 @@
 <app-navbar-vistas></app-navbar-vistas>
 
-<div class="banner" *ngIf="this.identidad.rol == 'ADMIN' && this.identidad">
+<div class="banner" *ngIf="this.identidad.rol == 'ADMIN'">
   <div class="capa"></div>
   <div class="info">
     <h1>Bienvenido Administrador</h1>
@@ -29,26 +29,15 @@
 
                   <div class="wrap">
                     <div class="search">
-                      <input
-                        [(ngModel)]="search"
-                        type="text"
-                        class="searchTerm"
-                        placeholder="Buscar"
-                      />
+                      <input [(ngModel)]="search" type="text" class="searchTerm" placeholder="Buscar" />
                       <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                       </button>
                     </div>
                   </div>
 
-                  <button
-                    *ngIf="this.identidad.rol == 'ADMIN'"
-                    id="ap"
-                    type="button"
-                    class="learn-more"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                  >
+                  <button *ngIf="this.identidad.rol == 'ADMIN'" id="ap" type="button" class="learn-more"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <span class="circle" aria-hidden="true">
                       <span class="icon arrow"></span>
                     </span>
@@ -64,61 +53,41 @@
                               <div class="form-inline"></div>
                             </div>
                           </div>
-                          <div
-                            class="row search-card-result"
-                            *ngFor="let hoteles of getModelo | busqueda: search"
-                          >
+                          <div class="row search-card-result" *ngFor="let hoteles of getModelo | busqueda: search">
                             <div class="col-md-3">
-                              <img
-                                class="img-fluid"
-                                src="http://placeimg.com/640/640/arch"
-                                alt="Card image cap"
-                              />
+                              <img class="img-fluid" src="http://placeimg.com/640/640/arch" alt="Card image cap" />
                             </div>
                             <div class="col-md-5">
                               <h5>{{ hoteles.nombre }}</h5>
                               <div class="review">
-                                <span class="fa fa-star checked"></span
-                                ><span class="fa fa-star checked"></span
-                                ><span class="fa fa-star checked"></span
-                                ><span class="fa fa-star"></span
-                                ><span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span
+                                  class="fa fa-star checked"></span><span class="fa fa-star"></span><span
+                                  class="fa fa-star"></span>
                               </div>
                               <p class="border-top additional">
                                 Gerente: {{ hoteles.gerente }}
                               </p>
                               <p>Teléfono: {{ hoteles.telefono }}</p>
                               <p>
-                                <i class="p-3 fa fa-bath"></i
-                                ><i class="p-3 fa fa-phone"></i
-                                ><i class="p-3 fa fa-wifi"></i
-                                ><i class="p-3 fa fa-tv"></i>
+                                <i class="p-3 fa fa-bath"></i><i class="p-3 fa fa-phone"></i><i
+                                  class="p-3 fa fa-wifi"></i><i class="p-3 fa fa-tv"></i>
                               </p>
                             </div>
-                            <div
-                              class="gy-4 col-md-2 border-left text-center more-offers"
-                            ></div>
-                            <div
-                              class="gy-4 col-md-2 border-left text-center more-offers"
-                            >
-                              <div
-                                *ngIf="this.identidad.rol == 'USUARIO'"
-                                class="btn btn-success"
-                                [routerLink]="[
+                            <div class="gy-4 col-md-2 border-left text-center more-offers"></div>
+                            <div class="gy-4 col-md-2 border-left text-center more-offers">
+                              <div *ngIf="this.identidad.rol == 'USUARIO'" class="btn btn-success" [routerLink]="[
                                   '/routerUsuario/verHotel',
                                   hoteles._id
-                                ]"
-                              >
+                                ]">
                                 Reservar &gt;
                               </div>
-                              <div
-                                *ngIf="this.identidad.rol == 'ADMIN'"
-                                [routerLink]="[
+                              <div *ngIf="this.identidad.rol == 'ADMIN'" [routerLink]="[
                                   '/principal/verHotel',
                                   hoteles._id
-                                ]"
-                                class="btn btn-success"
-                              >
+                                ]" class="btn btn-success" [routerLink]="[
+                                  '/principal/verHotel',
+                                  hoteles._id
+                                ]">
                                 Ver hotel &gt;
                               </div>
                             </div>
@@ -139,13 +108,7 @@
 
 <!-- -------- -->
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -158,39 +121,21 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!nombre.valid && nombre.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="nombre"
-                  #nombre="ngModel"
-                  [(ngModel)]="postModelo.nombre"
-                  required
-                />
+                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="postModelo.nombre"
+                  required />
                 <label class="form-label" for="form3Example1">Nombre</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!direccion.valid && direccion.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!direccion.valid && direccion.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="direccion"
-                  #direccion="ngModel"
-                  [(ngModel)]="postModelo.direccion"
-                  required
-                />
+                <input type="text" class="form-control" name="direccion" #direccion="ngModel"
+                  [(ngModel)]="postModelo.direccion" required />
                 <label class="form-label" for="form3Example2">Dirección</label>
               </div>
             </div>
@@ -199,39 +144,21 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!cuartos.valid && cuartos.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!cuartos.valid && cuartos.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="cuartos"
-                  #cuartos="ngModel"
-                  [(ngModel)]="postModelo.cuartos"
-                  required
-                />
+                <input type="number" class="form-control" name="cuartos" #cuartos="ngModel"
+                  [(ngModel)]="postModelo.cuartos" required />
                 <label class="form-label">Cantidad de habitaciones</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!gerente.valid && gerente.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!gerente.valid && gerente.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="gerente"
-                  #gerente="ngModel"
-                  [(ngModel)]="postModelo.gerente"
-                  required
-                />
+                <input type="text" class="form-control" name="gerente" #gerente="ngModel"
+                  [(ngModel)]="postModelo.gerente" required />
                 <label class="form-label">Nombre del Gerente</label>
               </div>
             </div>
@@ -239,59 +166,32 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!telefono.valid && telefono.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!telefono.valid && telefono.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="telefono"
-                  #telefono="ngModel"
-                  [(ngModel)]="postModelo.telefono"
-                  required
-                />
+                <input type="number" class="form-control" name="telefono" #telefono="ngModel"
+                  [(ngModel)]="postModelo.telefono" required />
                 <label class="form-label">Número de teléfono</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <span
-                  *ngIf="!email.valid && email.touched"
-                  class="requiredField"
-                >
+                <span *ngIf="!email.valid && email.touched" class="requiredField">
                   Campo requerido
                 </span>
-                <input
-                  type="email"
-                  class="form-control"
-                  name="email"
-                  #email="ngModel"
-                  [(ngModel)]="postModelo.email"
-                  required
-                />
+                <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="postModelo.email"
+                  required />
                 <label class="form-label">Email</label>
               </div>
             </div>
           </div>
           <div *ngIf="identidad.rol == 'ADMIN'" class="mb-3">
             <label class="form-label">Password</label>
-            <span
-              *ngIf="!password.valid && password.touched"
-              class="requiredField"
-            >
+            <span *ngIf="!password.valid && password.touched" class="requiredField">
               Campo requerido
             </span>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              #password="ngModel"
-              [(ngModel)]="postModelo.password"
-              required
-            />
+            <input type="password" class="form-control" name="password" #password="ngModel"
+              [(ngModel)]="postModelo.password" required />
           </div>
         </form>
       </div>
@@ -299,14 +199,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cancelar
         </button>
-        <button
-          *ngIf="identidad.rol == 'ADMIN'"
-          type="button"
-          data-bs-dismiss="modal"
-          class="btn btn-primary"
-          [disabled]="!agregarHotel.form.valid"
-          (click)="postHotel(agregarHotel)"
-        >
+        <button *ngIf="identidad.rol == 'ADMIN'" type="button" data-bs-dismiss="modal" class="btn btn-primary"
+          [disabled]="!agregarHotel.form.valid" (click)="postHotel(agregarHotel)">
           Agregar
         </button>
       </div>

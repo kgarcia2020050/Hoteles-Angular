@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
   providers: [LoginService, AdministracionService],
 })
 export class GraficaHotelesComponent implements OnInit {
+
   chartOptions = {
     responsive: true,
   };

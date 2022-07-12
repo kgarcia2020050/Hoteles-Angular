@@ -3,74 +3,48 @@
 <body>
   <div id="table" class="container emp-profile">
     <form #editForm="ngForm" method="post">
-      <div class="row">
+      <div class="row" id="rows">
         <div class="col-md-4">
           <div class="profile-img">
-            <img
-              *ngIf="getIdModelo.rol == 'ADMIN'"
-              class="rounded-circle mt-5"
-              width="150px"
-              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-            />
+            <img *ngIf="getIdModelo.rol == 'ADMIN'" class="rounded-circle mt-5" width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" />
 
-            <img
-              *ngIf="getIdModelo.rol == 'HOTEL'"
-              class="rounded-circle mt-5"
-              height="300px"
-              src="https://img.freepik.com/vector-gratis/hotel-o-motel-vector-edificio-ciudad-ciudad-ilustracion-dibujos-animados-plana-aislado-sobre-fondo-blanco_212005-309.jpg?w=740"
-            />
+            <img *ngIf="getIdModelo.rol == 'HOTEL'" class="rounded-circle mt-5" height="300px"
+              src="https://img.freepik.com/vector-gratis/hotel-o-motel-vector-edificio-ciudad-ciudad-ilustracion-dibujos-animados-plana-aislado-sobre-fondo-blanco_212005-309.jpg?w=740" />
 
-            <img
-              *ngIf="getIdModelo.rol == 'USUARIO'"
-              class="rounded-circle mt-5"
-              width="200px"
-              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"
-            />
+            <img *ngIf="getIdModelo.rol == 'USUARIO'" class="rounded-circle mt-5" width="200px"
+              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="profile-head">
             <h5>
-              <span
-                *ngIf="
+              <span *ngIf="
                   getIdModelo.rol == 'USUARIO' || getIdModelo.rol == 'ADMIN'
-                "
-                class="font-weight-bold"
-                >Nombre: {{ getIdModelo.nombre }}</span
-              >
+                " class="font-weight-bold">Nombre: {{ getIdModelo.nombre }}</span>
             </h5>
             <h6 *ngIf="this.identidad.rol == 'ADMIN'">
               Administrador de la aplicación
             </h6>
             <h6 *ngIf="this.identidad.rol == 'HOTEL'">
-              Administrador deL hotel
+              Administrador del hotel
+            </h6>
+            <h6 *ngIf="this.identidad.rol == 'USUARIO'">
+              Usuario del hotel
             </h6>
             <p class="proile-rating">OPCIONES : <span></span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  id="home-tab"
-                  data-toggle="tab"
-                  role="tab"
-                  aria-controls="home"
-                  aria-selected="true"
-                  >Editar perfil</a
-                >
+                <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                  aria-selected="true">Editar perfil</a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-md-2">
-          <button
-            *ngIf="getIdModelo.rol == 'USUARIO'"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasScrolling"
-            aria-controls="offcanvasScrolling"
-            class="btn btn-primary"
-            type="button"
-            (click)="historial(this.identidad._id)"
-          >
+          <button *ngIf="getIdModelo.rol == 'USUARIO'" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling" class="btn btn-primary" type="button"
+            (click)="historial(this.identidad._id)">
             Servicios
           </button>
         </div>
@@ -79,29 +53,16 @@
         <div class="col-md-4"></div>
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div class="row">
                 <div class="col-md-5">
                   <label>Nombre</label>
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <span *ngIf="!nombre.valid && nombre.touched"
-                      >Campo requerido</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="nombre"
-                      required="true"
-                      #nombre="ngModel"
-                      [(ngModel)]="getIdModelo.nombre"
-                    />
+                    <span *ngIf="!nombre.valid && nombre.touched">Campo requerido</span>
+                    <input type="text" class="form-control" name="nombre" required="true" #nombre="ngModel"
+                      [(ngModel)]="getIdModelo.nombre" />
                   </p>
                 </div>
               </div>
@@ -111,17 +72,9 @@
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <span *ngIf="!email.valid && email.touched"
-                      >Campo requerido</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="email"
-                      #email="ngModel"
-                      required="true"
-                      [(ngModel)]="getIdModelo.email"
-                    />
+                    <span *ngIf="!email.valid && email.touched">Campo requerido</span>
+                    <input type="text" class="form-control" name="email" #email="ngModel" required="true"
+                      [(ngModel)]="getIdModelo.email" />
                   </p>
                 </div>
               </div>
@@ -131,17 +84,9 @@
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <span *ngIf="!direccion.valid && direccion.touched"
-                      >Campo requerido</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="direccion"
-                      #direccion="ngModel"
-                      required="true"
-                      [(ngModel)]="getIdModelo.direccion"
-                    />
+                    <span *ngIf="!direccion.valid && direccion.touched">Campo requerido</span>
+                    <input type="text" class="form-control" name="direccion" #direccion="ngModel" required="true"
+                      [(ngModel)]="getIdModelo.direccion" />
                   </p>
                 </div>
               </div>
@@ -152,99 +97,55 @@
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <span *ngIf="!gerente.valid && gerente.touched"
-                      >Campo requerido</span
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="gerente"
-                      #gerente="ngModel"
-                      required="true"
-                      [(ngModel)]="getIdModelo.gerente"
-                    />
+                    <span *ngIf="!gerente.valid && gerente.touched">Campo requerido</span>
+                    <input type="text" class="form-control" name="gerente" #gerente="ngModel" required="true"
+                      [(ngModel)]="getIdModelo.gerente" />
                   </p>
                 </div>
               </div>
 
-              <div
-                *ngIf="
+              <div *ngIf="
                   this.identidad.rol == 'USUARIO' ||
                   this.identidad.rol == 'HOTEL'
-                "
-                class="row"
-              >
+                " class="row">
                 <div class="col-md-5">
                   <label>Telefono</label>
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <span *ngIf="!telefono.valid && telefono.touched"
-                      >Campo requerido</span
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="telefono"
-                      #telefono="ngModel"
-                      required="true"
-                      [(ngModel)]="getIdModelo.telefono"
-                    />
+                    <span *ngIf="!telefono.valid && telefono.touched">Campo requerido</span>
+                    <input type="number" class="form-control" name="telefono" #telefono="ngModel" required="true"
+                      [(ngModel)]="getIdModelo.telefono" />
                   </p>
                 </div>
               </div>
-              <div
-                class="row"
-                *ngIf="this.identidad.rol == 'HOTEL' && this.libres == 0"
-              >
+              <div class="row" *ngIf="this.identidad.rol == 'HOTEL' && this.libres == 0">
                 <div class="col-md-5">
                   <label>Agregar habitaciones</label>
                 </div>
                 <div class="col-md-6">
                   <p>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cuartos"
-                      #cuartos="ngModel"
-                      required="true"
-                      [(ngModel)]="getIdModelo.cuartos"
-                    />
+                    <input type="text" class="form-control" name="cuartos" #cuartos="ngModel" required="true"
+                      [(ngModel)]="getIdModelo.cuartos" />
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <button
-            [disabled]="!editForm.form.valid"
-            (click)="putPerfil()"
-            id="btnAgregar"
-            class="learn-more"
-          >
+          <button [disabled]="!editForm.form.valid" (click)="putPerfil()" id="btnAgregar" class="learn-more">
             <span class="circle" aria-hidden="true">
               <span class="icon arrow"></span>
             </span>
             <span class="button-text">Guardar</span>
           </button>
-          <button
-            *ngIf="this.identidad.rol == 'USUARIO'"
-            (click)="eliminarPerfil()"
-            id="btnAgregar"
-            class="learn-more"
-          >
+          <button *ngIf="this.identidad.rol == 'USUARIO'" (click)="eliminarPerfil()" id="btnBorrar" class="learn-more">
             <span class="circle" aria-hidden="true">
               <span class="icon arrow"></span>
             </span>
             <span class="button-text">Borrar perfil</span>
           </button>
-          <button
-            (click)="verFactura(this.identidad._id)"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            *ngIf="this.identidad.rol == 'USUARIO'"
-            id="btnAgregar"
-            class="learn-more"
-          >
+          <button (click)="verFactura(this.identidad._id)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            *ngIf="this.identidad.rol == 'USUARIO'" id="btnAgregar" class="learn-more">
             <span class="circle" aria-hidden="true">
               <span class="icon arrow"></span>
             </span>
@@ -257,44 +158,67 @@
 </body>
 
 <body>
-  <h3 *ngIf="this.identidad.rol == 'USUARIO'">Mis reservaciones actuales</h3>
+  <section class="intro" *ngIf="this.identidad.rol == 'USUARIO'">
+    <div class="bg-image h-100">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="title-cards">
+                      <h2>Mis reservaciones actuales</h2>
+                    </div>
 
-  <div *ngIf="this.identidad.rol == 'USUARIO'">
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered table-info border-primary">
-        <thead>
-          <tr>
-            <th scope="col">Habitaciones</th>
-            <th scope="col">Hotel</th>
-            <th scope="col">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let info of getHabitacion">
-            <td>{{ info.nombre }}</td>
-            <td>{{ info.idHotel.nombre }}</td>
-            <td>
-              <a
-                ><button
-                  (click)="cancelar(info._id)"
-                  class="btn btn-outline-danger"
-                >
-                  <i class="fa-solid fa-ban"></i></button
-              ></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                    <div class="wrap">
+                      <div class="search">
+                        <input type="text" class="searchTerm" placeholder="Buscar" />
+                        <button type="submit" class="searchButton">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Habitaciones</th>
+                          <th scope="col">Hotel</th>
+                          <th scope="col">Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let info of getHabitacion | busqueda: search
+                            ">
+                          <th scope="row">{{ info.nombre }}</th>
+                          <td>
+                            <span>
+                              <span>{{ info.idHotel.nombre }}</span>
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              <span>
+                                <a><button (click)="cancelar(info._id)" class="btn btn-outline-danger">
+                                    <i class="fa-solid fa-ban"></i></button></a>
+                              </span>
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -302,11 +226,7 @@
         </div>
         <div class="modal-body">
           <div class="text-right">
-            <button
-              data-bs-dismiss="modal"
-              class="btn btn-primary"
-              type="button"
-            >
+            <button data-bs-dismiss="modal" class="btn btn-primary" type="button">
               Cancelar
             </button>
           </div>
@@ -321,23 +241,19 @@
               <hr class="new1" />
             </div>
 
-            <div
-              *ngFor="let productos of this.compras"
-              class="d-flex justify-content-between"
-            >
+            <div *ngFor="let productos of this.compras" class="d-flex justify-content-between">
               <span class="font-weight-bold">{{ productos.compra }}</span>
               <span class="text-muted">{{ productos.precio }}</span>
             </div>
 
             <div class="d-flex justify-content-between mt-3">
               <span class="font-weight-bold">Total</span>
-              <span class="font-weight-bold theme-color"
-                >Q{{ this.total }}</span
-              >
+              <span class="font-weight-bold theme-color">Q{{ this.total }}</span>
             </div>
 
             <div class="text-center mt-5">
-              <button data-bs-dismiss="modal" (click)="pagar(this.identidad._id)" class="btn btn-primary">Paga tu factura</button>
+              <button data-bs-dismiss="modal" (click)="pagar(this.identidad._id)" class="btn btn-primary">Paga tu
+                factura</button>
             </div>
           </div>
         </div>
@@ -346,39 +262,39 @@
   </div>
 </body>
 
-<div
-  class="offcanvas offcanvas-end"
-  data-bs-scroll="true"
-  data-bs-backdrop="false"
-  tabindex="-1"
-  id="offcanvasScrolling"
-  aria-labelledby="offcanvasScrollingLabel"
->
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
-      Historial de servicios
-    </h5>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered table-info border-primary">
-        <thead>
-          <tr>
-            <th scope="col">Servicios</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let info of getHistorial">
-            <td>{{info.nombre}}</td>
-          </tr>
-        </tbody>
-      </table>
+<section class="intro" class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+  id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <div class="table-responsive">
+                  <div class="title-cards">
+                    <h2>Historial de servicios</h2>
+                  </div>
+
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Servicios</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let info of getHistorial">
+                        <td>{{info.nombre}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
