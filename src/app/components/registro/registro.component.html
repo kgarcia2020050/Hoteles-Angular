@@ -1,122 +1,61 @@
 <app-navbar></app-navbar>
-<section class="vh-100 gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-dark text-white" style="border-radius: 1rem">
-          <div class="card-body p-5 text-center">
-            <form #registerForm="ngForm">
-              <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">Regístrate</h2>
 
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline form-white mb-4">
-                      <span
-                        *ngIf="!nombre.valid && nombre.touched"
-                        class="requiredField"
-                      >
-                        Campo requerido
-                      </span>
-                      <input
-                        type="text"
-                        name="nombre"
-                        #nombre="ngModel"
-                        [(ngModel)]="postModelo.nombre"
-                        class="form-control form-control-lg"
-                        required="true"
-                      />
-                      <label class="form-label">Nombre</label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline form-white mb-4">
-                      <span
-                        *ngIf="!email.valid && email.touched"
-                        class="requiredField"
-                      >
-                        Campo requerido
-                      </span>
-                      <input
-                        type="email"
-                        name="email"
-                        #email="ngModel"
-                        [(ngModel)]="postModelo.email"
-                        class="form-control form-control-lg"
-                        required="true"
-                      />
-                      <label class="form-label" for="typeEmailX">Email</label>
+<body>
+  <div class="section">
+    <div class="container">
+      <div class="row full-height justify-content-center">
+        <div class="col-12 text-center align-self-center py-5">
+          <div class="section pb-5 pt-5 pt-sm-2 text-center">
+            <input class="checkbox" type="checkbox" id="reg-log" name="reg-log">
+            <div class="card-3d-wrap mx-auto">
+              <div class="card-3d-wrapper">
+                <div class="card-front">
+                  <div class="center-wrap">
+                    <div class="section text-center">
+                      <h4 class="mb-4 pb-3">Crear Cuenta</h4>
+                      <div class="form-group">
+                        <span *ngIf="!nombre.valid && nombre.touched" class="requiredField">
+                          Campo requerido
+                        </span>
+                        <input #nombre="ngModel" [(ngModel)]="postModelo.nombre" type="text" name="logname"
+                          class="form-style" placeholder="Nombre" id="logname" autocomplete="off">
+                        <i class="input-icon uil uil-user"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <span *ngIf="!email.valid && email.touched" class="requiredField">
+                          Campo requerido
+                        </span>
+                        <input name="email" #email="ngModel" [(ngModel)]="postModelo.email" type="email" name="logemail"
+                          class="form-style" placeholder="Email" id="logemail" autocomplete="off">
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <span *ngIf="!telefono.valid && telefono.touched" class="requiredField">
+                          Campo requerido
+                        </span>
+                        <input #telefono="ngModel" [(ngModel)]="postModelo.telefono" type="number" name="logemail"
+                          class="form-style" placeholder="Número de teléfono" id="logemail" autocomplete="off">
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <span *ngIf="!password.valid && password.touched" class="requiredField">
+                          Campo requerido
+                        </span>
+                        <input #password="ngModel" [(ngModel)]="postModelo.password" type="password" name="logpass"
+                          class="form-style" placeholder="Password" id="logpass" autocomplete="off">
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <a (click)="postUsuarios()" class="btn mt-4">Crear Cuenta</a>
+                      <p class="mb-0 mt-4 text-center"><a routerLink="/login" class="link">¿Ya tienes una cuenta? haz
+                          clic aquí iniciar sesión.</a></p>
                     </div>
                   </div>
                 </div>
-
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline form-white mb-4">
-                      <span
-                        *ngIf="!telefono.valid && telefono.touched"
-                        class="requiredField"
-                      >
-                        Campo requerido
-                      </span>
-                      <input
-                        type="number"
-                        name="telefono"
-                        #telefono="ngModel"
-                        [(ngModel)]="postModelo.telefono"
-                        class="form-control form-control-lg"
-                        required="true"
-                      />
-                      <label class="form-label" for="typeEmailX"
-                        >Número de teléfono</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline form-white mb-4">
-                      <span
-                        *ngIf="!password.valid && password.touched"
-                        class="requiredField"
-                      >
-                        Campo requerido
-                      </span>
-                      <input
-                        type="password"
-                        name="password"
-                        #password="ngModel"
-                        [(ngModel)]="postModelo.password"
-                        class="form-control form-control-lg"
-                        required="true"
-                      />
-                      <label class="form-label" for="typePasswordX"
-                        >Contraseña</label
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  (click)="postUsuarios()"
-                  class="btn btn-outline-light btn-lg px-5"
-                  [disabled]="!registerForm.form.valid"
-                  type="submit"
-                >
-                  Guardar datos
-                </button>
-                <p class="mb-0">
-                  ¿Ya tienes una cuenta?
-                  <a
-                    routerLink="/login"
-                    routerLinkActive="active"
-                    class="link-danger"
-                    >Iniciar sesión</a
-                  >
-                </p>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</body>
